@@ -7,8 +7,7 @@
   
 #+begin_src emacs-lisp 
 
-(load-theme 'solarized-gruvbox-dark)
-(enable-theme 'solarized-gruvbox-dark)
+(load-theme 'solarized-gruvbox-dark t)
 
 #+end_src
 
@@ -24,7 +23,6 @@
 #+end_src
 
 * Org Mode Customisation 
-
 ** Org Bullets
 
  #+begin_src emacs-lisp 
@@ -47,6 +45,8 @@
   
 * Flyspell
 
+Enables in text buffers and in comments within code buffers.
+
 #+begin_src emacs-lisp 
 
 (dolist (hook '(text-mode-hook))
@@ -57,6 +57,8 @@
 #+end_src
 
 * PATH
+  
+Give emacs the system PATH so it knows where system packages are.
 
 #+begin_src emacs-lisp 
 
@@ -66,6 +68,9 @@
 #+end_src
 
 * Racket 
+
+Binds <f5> to racket-run. 
+Racket-xp - WIP
 
 #+begin_src emacs-lisp 
 
@@ -80,6 +85,8 @@
 #+end_src
 
 * Neotree
+
+Activates neotree (file browser). Binds neotree to <f8>
   
 #+begin_src emacs-lisp 
 
