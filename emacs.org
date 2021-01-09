@@ -1,11 +1,12 @@
 #+title: Emacs Config File 
 
 #+STARTUP: overview 
-#+PROPERTY: header-args :comments yes :results silent
+#+PROPERTY: header-args :comments yes :results silent 
+
 
 * Custom Set Variables 
 
-#+begin_src emacs-lisp :tangle yes 
+#+begin_src emacs-lisp 
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -23,7 +24,9 @@
 
 * Custom Set Faces
 
-#+begin_src emacs-lisp :tangle yes
+org-bullet face, by /zhangda/
+
+#+begin_src emacs-lisp 
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -36,8 +39,8 @@
 #+end_src
 
 * Theme 
-
-#+begin_src emacs-lisp :tangle yes
+  
+#+begin_src emacs-lisp 
 
 (load-theme 'solarized-gruvbox-dark)
 (enable-theme 'solarized-gruvbox-dark)
@@ -45,19 +48,102 @@
 #+end_src
 
 * Startup Modes
-
-#+begin_src emacs-lisp :tangle yes
+  
+#+begin_src emacs-lisp 
 
 (line-number-mode t)
+(global-visual-line-mode 1)
 
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+#+end_src
+
+* Emacs and Org Mode Beautifying 
+
+Heavily inspired by /zhangda's/ emacs configuration:
+
+https://zhangda.wordpress.com/2016/02/15/configurations-for-beautifying-emacs-org-mode/
+
+
+** Font and Fall Back Font
+
+ Fall back font - useful for displaying unicode symbols.
+
+ #+begin_src emacs-lisp 
+
+ (set-fontset-font "fontset-default" nil 
+                   (font-spec :size 20 :name "Symbola"))
+
+ #+end_src
+
+ Sets the English font. 
+
+ #+begin_src emacs-lisp 
+
+ (set-face-attribute
+   'default nil :stipple nil :height 130 :width 'normal :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant 'normal :weight 'normal :foundry "outline" :family "DejaVu Sans Mono for Powerline")
+
+ #+end_src
+
+** Utf coding
+
+#+begin_src  emacs-lisp 
+
+;; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
+(setq utf-translate-cjk-mode nil)
+
+(set-language-environment 'utf-8)
+(setq locale-coding-system 'utf-8)
+
+;; set the default encoding system
+(prefer-coding-system 'utf-8)
+(setq default-file-name-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+;; backwards compatibility as default-buffer-file-coding-system
+;; is deprecated in 23.2.
+(if (boundp buffer-file-coding-system)
+    (setq buffer-file-coding-system 'utf-8)
+  (setq default-buffer-file-coding-system 'utf-8))
+
+;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+#+end_src
+
+** Org Bullets
+
+ #+begin_src emacs-lisp 
+
+ (require 'org-bullets)
+
+ (setq org-bullets-face-name (quote org-bullet-face))
+ (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+ (setq org-bullets-bullet-list '("✙" "♱" "♰" "☥" "✞" "✟" "✝" "†" "✠" "✚" "✜" "✛" "✢" "✣" "✤" "✥"))
+
+ #+end_src
+
+** Org Ellipsis 
+
+#+begin_src emacs-lisp
+
+(setq org-ellipsis "⤵")
+
+#+end_src
+
+* Flyspell
+
+#+begin_src emacs-lisp 
+
+(dolist (hook '(text-mode-hook))
+      (add-hook hook (lambda () (flyspell-mode 1))))
+    (dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+      (add-hook hook (lambda () (flyspell-mode -1))))
 
 #+end_src
 
 * PATH
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp 
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
@@ -66,7 +152,7 @@
 
 * Racket 
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp 
 
 (add-hook 'racket-mode-hook
 	  (lambda ()
@@ -80,7 +166,7 @@
 
 * Misc
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp 
 
 (add-to-list 'load-path "~/.emacs.d/neotree")
 (require 'neotree)
@@ -90,7 +176,6 @@
 (ac-config-default)
 
 #+end_src
-
 
 
 
