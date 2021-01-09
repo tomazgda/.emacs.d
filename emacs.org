@@ -3,41 +3,6 @@
 #+STARTUP: overview 
 #+PROPERTY: header-args :comments yes :results silent 
 
-
-* Custom Set Variables 
-
-#+begin_src emacs-lisp 
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(cua-mode t nil (cua-base))
- '(custom-safe-themes
-   '("9685cefcb4efd32520b899a34925c476e7920725c8d1f660e7336f37d6d95764" "285d1bf306091644fb49993341e0ad8bafe57130d9981b680c1dbd974475c5c7" "13a8eaddb003fd0d561096e11e1a91b029d3c9d64554f8e897b2513dbf14b277" "51ec7bfa54adf5fff5d466248ea6431097f5a18224788d0bd7eb1257a4f7b773" "830877f4aab227556548dc0a28bf395d0abe0e3a0ab95455731c9ea5ab5fe4e1" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "0fffa9669425ff140ff2ae8568c7719705ef33b7a927a0ba7c5e2ffcfac09b75" default))
- '(package-selected-packages
-   '(auto-complete org-beautify-theme exec-path-from-shell swift-mode racket-mode org-bullets solarized-theme))
- '(racket-program "/Applications/Racket/bin/racket"))
-
-#+end_src
-
-* Custom Set Faces
-
-org-bullet face, by /zhangda/
-
-#+begin_src emacs-lisp 
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-
-#+end_src
-
 * Theme 
   
 #+begin_src emacs-lisp 
@@ -53,6 +18,8 @@ org-bullet face, by /zhangda/
 
 (line-number-mode t)
 (global-visual-line-mode 1)
+(global-visual-fill-column-mode 1)
+(set-fill-column 85)
 
 #+end_src
 
@@ -62,12 +29,11 @@ Heavily inspired by /zhangda's/ emacs configuration:
 
 https://zhangda.wordpress.com/2016/02/15/configurations-for-beautifying-emacs-org-mode/
 
-
 ** Font and Fall Back Font
 
  Fall back font - useful for displaying unicode symbols.
 
- #+begin_src emacs-lisp 
+ #+begin_src emacs-lisp
 
  (set-fontset-font "fontset-default" nil 
                    (font-spec :size 20 :name "Symbola"))
@@ -78,8 +44,8 @@ https://zhangda.wordpress.com/2016/02/15/configurations-for-beautifying-emacs-or
 
  #+begin_src emacs-lisp 
 
- (set-face-attribute
-   'default nil :stipple nil :height 130 :width 'normal :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant 'normal :weight 'normal :foundry "outline" :family "DejaVu Sans Mono for Powerline")
+; (set-face-attribute
+;   'default nil :stipple nil :height 130 :width 'normal :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant 'normal :weight 'normal :foundry "outline" :family "DejaVu Sans Mono for Powerline")
 
  #+end_src
 
@@ -122,13 +88,13 @@ https://zhangda.wordpress.com/2016/02/15/configurations-for-beautifying-emacs-or
 
  #+end_src
 
-** Org Ellipsis 
+*** Org Ellipsis 
 
-#+begin_src emacs-lisp
+ #+begin_src emacs-lisp
 
-(setq org-ellipsis "⤵")
+ (setq org-ellipsis "⤵")
 
-#+end_src
+ #+end_src
 
 * Flyspell
 
@@ -164,14 +130,20 @@ https://zhangda.wordpress.com/2016/02/15/configurations-for-beautifying-emacs-or
 
 #+end_src
 
-* Misc
-
+* Neotree
+  
 #+begin_src emacs-lisp 
 
 (add-to-list 'load-path "~/.emacs.d/neotree")
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 (setq neo-smart-open t)
+
+#+end_src
+
+* Auto-complete 
+
+#+begin_src emacs-lisp 
 
 (ac-config-default)
 
